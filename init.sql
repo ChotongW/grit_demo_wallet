@@ -70,18 +70,3 @@ ON CONFLICT (account_id) DO NOTHING;
 INSERT INTO balances (account_id, amount, updated_at)
 VALUES ('1004', 0.00, NOW())
 ON CONFLICT (account_id) DO NOTHING;
-
--- Create initial ledger entry for Referral Funding Pool (for audit trail)
--- INSERT INTO ledger_entries (id, transaction_id, account_id, amount, direction, reference_id, description, created_at)
--- SELECT
---     gen_random_uuid()::text,
---     gen_random_uuid()::text,
---     '1001',
---     10000.00,
---     'CREDIT',
---     'INIT-REFERRAL-POOL',
---     'Initial funding for referral rewards pool',
---     NOW()
--- WHERE NOT EXISTS (
---     SELECT 1 FROM ledger_entries WHERE reference_id = 'INIT-REFERRAL-POOL'
--- );
