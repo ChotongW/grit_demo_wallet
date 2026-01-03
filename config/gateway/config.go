@@ -1,7 +1,6 @@
 package gateway
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/ilyakaznacheev/cleanenv"
@@ -31,8 +30,6 @@ func LoadConfig(path string) (*ServiceConfig, error) {
 			return nil, err
 		}
 	}
-
-	fmt.Printf("Loaded config: %+v\n", cfg)
 
 	return &cfg, nil
 }
