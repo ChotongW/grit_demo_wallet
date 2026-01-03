@@ -12,7 +12,6 @@ import (
 // @title           Grit Demo Wallet API
 // @version         1.0
 // @description     API Gateway for the Demo Wallet
-// @host            localhost:8080
 // @BasePath        /api/v1
 
 func main() {
