@@ -44,5 +44,5 @@ else
 fi
 
 echo -e "${GREEN}Setup complete!${NC}"
-echo -e "You can now run: ${GREEN}docker compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d${NC}"
-echo -e "Make sure to export REGISTRY_PREFIX first!"
+echo -e "You can now run: ${GREEN}docker compose --env-file .env -f docker-compose.yaml -f docker-compose.prod.yaml up -d${NC}"
+echo -e "Make sure to create .env and export REGISTRY_PREFIX first!"
