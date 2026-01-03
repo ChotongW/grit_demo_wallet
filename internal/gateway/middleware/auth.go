@@ -16,13 +16,13 @@ func AuthMiddleware(apiKey string) gin.HandlerFunc {
 
 		clientAPIKey := c.GetHeader("X-API-KEY")
 		if clientAPIKey == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "API Key is missing"})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
 			c.Abort()
 			return
 		}
 
 		if clientAPIKey != apiKey {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid API Key"})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
 			c.Abort()
 			return
 		}
