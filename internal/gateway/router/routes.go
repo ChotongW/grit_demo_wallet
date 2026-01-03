@@ -121,6 +121,6 @@ func NewRouter(config *gateway.ServiceConfig, logger *logrus.Logger) {
 //	@Router			/health [get]
 func HealthCheck(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"service": "e-contract",
+		"service": "demo-wallet-gateway",
 	})
 }

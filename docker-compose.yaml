@@ -3,9 +3,9 @@ services:
     image: postgres:18-alpine
     container_name: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres_db
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres_db}
     ports:
       - "5432:5432"
     volumes:
@@ -30,12 +30,12 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      - GRPC_PORT=50051
+      - GRPC_PORT=${SUBLEDGER_GRPC_PORT:-50051}
       - DATABASE_TYPE=postgres
       - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=postgres
+      - DATABASE_USERNAME=${POSTGRES_USER:-postgres}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - DATABASE_NAME=postgres_db
       - DATABASE_SSL_MODE=disable
       - DATABASE_SCHEMA=public
@@ -43,12 +43,13 @@ services:
       - DATABASE_MAX_CONN_IDLE_TIME=5m
       - DATABASE_MAX_CONN_LIFETIME=1h
       - DATABASE_HEALTH_CHECK_PERIOD=1m
-      - LOG_LEVEL=debug
+      - DATABASE_HEALTH_CHECK_PERIOD=1m
+      - LOG_LEVEL=${LOG_LEVEL:-debug}
       - LOG_FORMAT_JSON=false
       - LOG_COLOR=true
       - LOG_LINE_DETAILS=true
     ports:
-      - "50051:50051"
+      - "${SUBLEDGER_GRPC_PORT:-50051}:50051"
     networks:
       - demo_network
     restart: unless-stopped
@@ -66,13 +67,13 @@ services:
       subledger-service:
         condition: service_started
     environment:
-      - GRPC_PORT=50052
-      - SUBLEDGER_RPC_ADDR=subledger-service:50051
+      - GRPC_PORT=${ACCOUNTS_GRPC_PORT:-50052}
+      - SUBLEDGER_RPC_ADDR=${SUBLEDGER_HOST:-subledger-service}:${SUBLEDGER_PORT:-50051}
       - DATABASE_TYPE=postgres
       - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=postgres
+      - DATABASE_USERNAME=${POSTGRES_USER:-postgres}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - DATABASE_NAME=postgres_db
       - DATABASE_SSL_MODE=disable
       - DATABASE_SCHEMA=public
@@ -80,12 +81,13 @@ services:
       - DATABASE_MAX_CONN_IDLE_TIME=5m
       - DATABASE_MAX_CONN_LIFETIME=1h
       - DATABASE_HEALTH_CHECK_PERIOD=1m
-      - LOG_LEVEL=debug
+      - DATABASE_HEALTH_CHECK_PERIOD=1m
+      - LOG_LEVEL=${LOG_LEVEL:-debug}
       - LOG_FORMAT_JSON=false
       - LOG_COLOR=true
       - LOG_LINE_DETAILS=true
     ports:
-      - "50052:50052"
+      - "${ACCOUNTS_GRPC_PORT:-50052}:50052"
     networks:
       - demo_network
     restart: unless-stopped
@@ -101,20 +103,20 @@ services:
       - subledger-service
       - accounts-service
     environment:
-      - HTTP_PORT=8080
+      - HTTP_PORT=${GATEWAY_HTTP_PORT:-8080}
       - READ_HEADER_TIMEOUT=5s
       - READ_TIMEOUT=10s
       - WRITE_TIMEOUT=10s
       - IDLE_TIMEOUT=20s
-      - SUBLEDGER_SERVICE=subledger-service:50051
-      - ACCOUNTS_SERVICE=accounts-service:50052
+      - SUBLEDGER_SERVICE=${SUBLEDGER_HOST:-subledger-service}:${SUBLEDGER_PORT:-50051}
+      - ACCOUNTS_SERVICE=${ACCOUNTS_HOST:-accounts-service}:${ACCOUNTS_PORT:-50052}
       - GRPC_TIMEOUT=30s
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=${LOG_LEVEL:-debug}
       - LOG_FORMAT_JSON=false
       - LOG_COLOR=true
       - LOG_LINE_DETAILS=true
     ports:
-      - "8080:8080"
+      - "${GATEWAY_HTTP_PORT:-8080}:8080"
     networks:
       - demo_network
     restart: unless-stopped
