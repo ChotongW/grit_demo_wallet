@@ -36,7 +36,7 @@ services:
       - DATABASE_PORT=5432
       - DATABASE_USERNAME=${POSTGRES_USER:-postgres}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - DATABASE_NAME=postgres_db
+      - DATABASE_NAME=${POSTGRES_DB:-postgres_db}
       - DATABASE_SSL_MODE=disable
       - DATABASE_SCHEMA=public
       - DATABASE_MAX_OPEN_CONNS=10
@@ -74,7 +74,7 @@ services:
       - DATABASE_PORT=5432
       - DATABASE_USERNAME=${POSTGRES_USER:-postgres}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - DATABASE_NAME=postgres_db
+      - DATABASE_NAME=${POSTGRES_DB:-postgres_db}
       - DATABASE_SSL_MODE=disable
       - DATABASE_SCHEMA=public
       - DATABASE_MAX_OPEN_CONNS=10
