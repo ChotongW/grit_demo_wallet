@@ -1,0 +1,17 @@
+services:
+  subledger-service:
+    build: !reset
+    image: ${REGISTRY_PREFIX}/subledger:latest
+    pull_policy: always
+
+  accounts-service:
+    build: !reset
+    image: ${REGISTRY_PREFIX}/accounts:latest
+    pull_policy: always
+
+  api-gateway:
+    build: !reset
+    image: ${REGISTRY_PREFIX}/gateway:latest
+    pull_policy: always
+
+# Postgres uses the standard image defined in docker-compose.yaml, so no override needed.
