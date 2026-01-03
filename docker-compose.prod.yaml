@@ -1,15 +1,18 @@
 services:
   subledger-service:
+    container_name: subledger
     build: !reset
     image: ${REGISTRY_PREFIX}/subledger:latest
     pull_policy: always
 
   accounts-service:
+    container_name: accounts
     build: !reset
     image: ${REGISTRY_PREFIX}/accounts:latest
     pull_policy: always
 
   api-gateway:
+    container_name: gateway
     build: !reset
     image: ${REGISTRY_PREFIX}/gateway:latest
     pull_policy: always
@@ -19,4 +22,4 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    command: caddy reverse-proxy --from demo-wallet.duckdns.org --to api-gateway:8080
+    command: caddy reverse-proxy --from demo-wallet.duckdns.org --to gateway:8080
