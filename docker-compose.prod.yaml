@@ -23,3 +23,5 @@ services:
       - "80:80"
       - "443:443"
     command: caddy reverse-proxy --from demo-wallet.duckdns.org --to gateway:8080
+    networks:
+      - demo_network
