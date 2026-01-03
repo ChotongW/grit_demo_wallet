@@ -50,7 +50,6 @@ func NewRouter(config *gateway.ServiceConfig, logger *logrus.Logger) {
 	}
 	defer accountConn.Close()
 
-	subLedgerHandlers := handlers.NewSubLedgerHandler(logger, subledgerConn)
 	accountsHandlers := handlers.NewAccountsHandler(logger, accountConn)
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
@@ -74,7 +73,6 @@ func NewRouter(config *gateway.ServiceConfig, logger *logrus.Logger) {
 	apiV1.POST("/accounts/withdraw", accountsHandlers.Withdraw)
 	apiV1.POST("/transfers", accountsHandlers.Transfer)
 	apiV1.GET("/accounts/:account_id/transactions", accountsHandlers.GetTransactionHistory)
-	apiV1.POST("/transaction", subLedgerHandlers.CreateTransaction)
 
 	HttpServer := http.Server{
 		Addr:              fmt.Sprintf(":%d", config.HttpPort),
