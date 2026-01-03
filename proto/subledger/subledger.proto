@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package subledger;
+
+option go_package = "wasin.com/github.com/ChotongW/grit_demo_wallet/pb/subledger";
+
+service SubledgerService {
+  rpc CreateTransaction (CreateTransactionRequest) returns (CreateTransactionResponse);
+  
+  rpc GetBalance (GetBalanceRequest) returns (GetBalanceResponse);
+}
+
+message CreateTransactionRequest {
+  string reference_id = 1;
+  string description = 2;
+  repeated Entry entries = 3;
+}
+
+message Entry {
+  string account_id = 1;  
+  string amount = 2;      
+  string direction = 3;   
+}
+
+message CreateTransactionResponse {
+  bool success = 1;
+  string transaction_id = 2; 
+}
+
+message GetBalanceRequest {
+  string account_id = 1;
+}
+
+message GetBalanceResponse {
+  string account_id = 1;
+  string currency = 2;
+  string amount = 3;   
+  string updated_at = 4;
+}

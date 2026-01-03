@@ -1,0 +1,11 @@
+http_port: "8080"
+log_level: "info"
+log_format_json: false
+log_color: true
+read_header_timeout: 5s
+read_timeout: 10s
+write_timeout: 10s
+idle_timeout: 20s
+subledger_service: "subledger-service:50051"
+accounts_service: "accounts-service:50052"
+grpc_timeout: 30s

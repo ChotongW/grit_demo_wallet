@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package accounts;
+
+option go_package = "github.com/ChotongW/grit_demo_wallet/pb/accounts";
+
+service AccountsService {
+  rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse);
+  rpc GetAccount (GetAccountRequest) returns (GetAccountResponse);
+  rpc GetBalance (GetBalanceRequest) returns (GetBalanceResponse);
+
+  rpc Deposit (DepositRequest) returns (DepositResponse);
+  rpc Withdraw (WithdrawRequest) returns (WithdrawResponse);
+  rpc Transfer (TransferRequest) returns (TransferResponse);
+
+  rpc GetTransactionHistory (GetTransactionHistoryRequest) returns (GetTransactionHistoryResponse);
+}
+
+message CreateAccountRequest {
+  string email = 1;
+  string initial_balance = 2; 
+  string referrer_account_id = 3;   
+}
+
+message CreateAccountResponse {
+  bool success = 1;
+  string account_id = 2;
+  string message = 3;
+  Account account = 4;
+}
+
+message GetAccountRequest {
+  string account_id = 1;
+}
+
+message GetAccountResponse {
+  Account account = 1;
+}
+
+message GetBalanceRequest {
+  string account_id = 1;
+}
+
+message GetBalanceResponse {
+  string account_id = 1;
+  string balance = 2; 
+  string currency = 3;
+  string updated_at = 4;
+}
+
+
+message DepositRequest {
+  string account_id = 1;
+  string amount = 2; 
+  string description = 3;
+}
+
+message DepositResponse {
+  bool success = 1;
+  string transaction_id = 2;
+  string new_balance = 3;
+  string message = 4;
+}
+
+message WithdrawRequest {
+  string account_id = 1;
+  string amount = 2; 
+  string description = 3;
+}
+
+message WithdrawResponse {
+  bool success = 1;
+  string transaction_id = 2;
+  string new_balance = 3;
+  string message = 4;
+}
+
+message TransferRequest {
+  string from_account_id = 1;
+  string to_account_id = 2;
+  string amount = 3; 
+  string description = 4;
+}
+
+message TransferResponse {
+  bool success = 1;
+  string transaction_id = 2;
+  string new_balance = 3;
+  string message = 4;
+}
+
+message GetTransactionHistoryRequest {
+  string account_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message GetTransactionHistoryResponse {
+  repeated Transaction transactions = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  int32 total_pages = 5;
+}
+
+message Account {
+  string account_id = 1;
+  string account_type = 2;
+  optional string user_id = 3;
+  optional string email = 4;
+  optional string referrer_account_id = 5;
+  string balance = 6;
+  string created_at = 7;
+}
+
+message Transaction {
+  string id = 1;
+  string transaction_id = 2;
+  string account_id = 3;
+  string amount = 4;
+  string direction = 5;
+  string reference_id = 6;
+  string description = 7;
+  string created_at = 8;
+}

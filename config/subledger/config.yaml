@@ -1,0 +1,18 @@
+database:
+  type: postgres
+  log_level: info
+  host: postgres
+  port: "5432"
+  username: postgres
+  password: password
+  database_name: postgres_db
+  ssl_mode: disable
+  database_schema: public
+  max_open_conns: 25
+  max_conn_idle_time: 5m
+  max_conn_lifetime: 30m
+  health_check_period: 1m
+
+service:
+  name: subledger-service
+  grpc_port: "50051"
