@@ -54,6 +54,8 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Create new account
       tags:
       - Accounts
@@ -83,6 +85,8 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Get account details
       tags:
       - Accounts
@@ -116,6 +120,8 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Get account balance
       tags:
       - Accounts
@@ -161,6 +167,8 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Get transaction history
       tags:
       - Accounts
@@ -213,6 +221,8 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Deposit funds
       tags:
       - Wallet
@@ -265,6 +275,8 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Withdraw funds
       tags:
       - Wallet
@@ -334,7 +346,14 @@ paths:
               error:
                 type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Transfer funds
       tags:
       - Wallet
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
 swagger: "2.0"

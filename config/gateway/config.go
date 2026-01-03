@@ -20,6 +20,7 @@ type ServiceConfig struct {
 	SubledgerService  string        `yaml:"subledger_service" env:"SUBLEDGER_SERVICE" env-default:"localhost:50051"`
 	AccountsService   string        `yaml:"accounts_service" env:"ACCOUNTS_SERVICE" env-default:"localhost:50052"`
 	GrpcTimeout       time.Duration `yaml:"grpc_timeout" env:"GRPC_TIMEOUT" env-default:"5s"`
+	ApiKey            string        `yaml:"api_key" env:"API_KEY" env-default:"secret"`
 }
 
 func LoadConfig(path string) (*ServiceConfig, error) {

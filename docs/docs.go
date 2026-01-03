@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/accounts": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new user account with optional initial balance and referral",
                 "consumes": [
                     "application/json"
@@ -98,6 +103,11 @@ const docTemplate = `{
         },
         "/accounts/deposit": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deposit funds to an account from PSP",
                 "consumes": [
                     "application/json"
@@ -179,6 +189,11 @@ const docTemplate = `{
         },
         "/accounts/withdraw": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Withdraw funds from an account to PSP",
                 "consumes": [
                     "application/json"
@@ -260,6 +275,11 @@ const docTemplate = `{
         },
         "/accounts/{account_id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve account information including current balance",
                 "produces": [
                     "application/json"
@@ -305,6 +325,11 @@ const docTemplate = `{
         },
         "/accounts/{account_id}/balance": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve current balance for an account",
                 "produces": [
                     "application/json"
@@ -356,6 +381,11 @@ const docTemplate = `{
         },
         "/accounts/{account_id}/transactions": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve paginated transaction history for an account",
                 "produces": [
                     "application/json"
@@ -448,6 +478,11 @@ const docTemplate = `{
         },
         "/transfers": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Transfer funds from one account to another",
                 "consumes": [
                     "application/json"
@@ -529,6 +564,13 @@ const docTemplate = `{
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-KEY",
+            "in": "header"
         }
     }
 }`

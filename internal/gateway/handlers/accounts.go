@@ -41,6 +41,8 @@ func (h *AccountsHandler) loggerWithRequestID(c *gin.Context) *logrus.Entry {
 //	@Success		200		{object}	object{success=bool,account_id=string,message=string,account=object}
 //	@Failure		400		{object}	object{error=string}
 //	@Failure		500		{object}	object{error=string}
+//	@Failure		500		{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/accounts [post]
 func (h *AccountsHandler) CreateAccount(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)
@@ -86,6 +88,8 @@ func (h *AccountsHandler) CreateAccount(c *gin.Context) {
 //	@Param			account_id	path		string	true	"Account ID"
 //	@Success		200			{object}	object{account=object}
 //	@Failure		404			{object}	object{error=string}
+//	@Failure		404			{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/accounts/{account_id} [get]
 func (h *AccountsHandler) GetAccount(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)
@@ -121,6 +125,8 @@ func (h *AccountsHandler) GetAccount(c *gin.Context) {
 //	@Param			account_id	path		string	true	"Account ID"
 //	@Success		200			{object}	object{account_id=string,balance=string,currency=string}
 //	@Failure		404			{object}	object{error=string}
+//	@Failure		404			{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/accounts/{account_id}/balance [get]
 func (h *AccountsHandler) GetBalance(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)
@@ -160,6 +166,8 @@ func (h *AccountsHandler) GetBalance(c *gin.Context) {
 //	@Success		200			{object}	object{success=bool,transaction_id=string,new_balance=string,message=string}
 //	@Failure		400			{object}	object{error=string}
 //	@Failure		500			{object}	object{error=string}
+//	@Failure		500			{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/accounts/deposit [post]
 func (h *AccountsHandler) Deposit(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)
@@ -207,6 +215,8 @@ func (h *AccountsHandler) Deposit(c *gin.Context) {
 //	@Success		200			{object}	object{success=bool,transaction_id=string,new_balance=string,message=string}
 //	@Failure		400			{object}	object{error=string}
 //	@Failure		500			{object}	object{error=string}
+//	@Failure		500			{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/accounts/withdraw [post]
 func (h *AccountsHandler) Withdraw(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)
@@ -254,6 +264,8 @@ func (h *AccountsHandler) Withdraw(c *gin.Context) {
 //	@Success		200		{object}	object{success=bool,transaction_id=string,new_balance=string,message=string}
 //	@Failure		400		{object}	object{error=string}
 //	@Failure		500		{object}	object{error=string}
+//	@Failure		500		{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/transfers [post]
 func (h *AccountsHandler) Transfer(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)
@@ -303,6 +315,8 @@ func (h *AccountsHandler) Transfer(c *gin.Context) {
 //	@Param			page_size	query		int		false	"Page size (default: 20, max: 100)"
 //	@Success		200			{object}	object{transactions=array,total_count=int,page=int,page_size=int,total_pages=int}
 //	@Failure		500			{object}	object{error=string}
+//	@Failure		500			{object}	object{error=string}
+//	@Security		ApiKeyAuth
 //	@Router			/accounts/{account_id}/transactions [get]
 func (h *AccountsHandler) GetTransactionHistory(c *gin.Context) {
 	logger := h.loggerWithRequestID(c)

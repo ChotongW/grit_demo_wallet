@@ -13,6 +13,9 @@ import (
 // @version         1.0
 // @description     API Gateway for the Demo Wallet
 // @BasePath        /api/v1
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name X-API-KEY
 
 func main() {
 	configPath := os.Getenv("CONFIG_PATH")

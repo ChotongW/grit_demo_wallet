@@ -12,6 +12,7 @@ import (
 	"github.com/ChotongW/grit_demo_wallet/config/gateway"
 	_ "github.com/ChotongW/grit_demo_wallet/docs" // Import for swagger docs
 	"github.com/ChotongW/grit_demo_wallet/internal/gateway/handlers"
+	"github.com/ChotongW/grit_demo_wallet/internal/gateway/middleware"
 	"github.com/ChotongW/grit_demo_wallet/pkg/requestid"
 
 	"github.com/gin-gonic/gin"
@@ -63,6 +64,7 @@ func NewRouter(config *gateway.ServiceConfig, logger *logrus.Logger) {
 	})
 
 	api := r.Group("/api")
+	api.Use(middleware.AuthMiddleware(config.ApiKey))
 	apiV1 := api.Group("/v1")
 
 	apiV1.GET("/health", HealthCheck)

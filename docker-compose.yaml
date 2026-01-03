@@ -110,6 +110,7 @@ services:
       - IDLE_TIMEOUT=20s
       - SUBLEDGER_SERVICE=${SUBLEDGER_HOST:-subledger-service}:${SUBLEDGER_PORT:-50051}
       - ACCOUNTS_SERVICE=${ACCOUNTS_HOST:-accounts-service}:${ACCOUNTS_PORT:-50052}
+      - API_KEY=${API_KEY:-secret}
       - GRPC_TIMEOUT=30s
       - LOG_LEVEL=${LOG_LEVEL:-debug}
       - LOG_FORMAT_JSON=false

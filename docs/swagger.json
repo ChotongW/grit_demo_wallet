@@ -10,6 +10,11 @@
     "paths": {
         "/accounts": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new user account with optional initial balance and referral",
                 "consumes": [
                     "application/json"
@@ -91,6 +96,11 @@
         },
         "/accounts/deposit": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deposit funds to an account from PSP",
                 "consumes": [
                     "application/json"
@@ -172,6 +182,11 @@
         },
         "/accounts/withdraw": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Withdraw funds from an account to PSP",
                 "consumes": [
                     "application/json"
@@ -253,6 +268,11 @@
         },
         "/accounts/{account_id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve account information including current balance",
                 "produces": [
                     "application/json"
@@ -298,6 +318,11 @@
         },
         "/accounts/{account_id}/balance": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve current balance for an account",
                 "produces": [
                     "application/json"
@@ -349,6 +374,11 @@
         },
         "/accounts/{account_id}/transactions": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve paginated transaction history for an account",
                 "produces": [
                     "application/json"
@@ -441,6 +471,11 @@
         },
         "/transfers": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Transfer funds from one account to another",
                 "consumes": [
                     "application/json"
@@ -522,6 +557,13 @@
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-KEY",
+            "in": "header"
         }
     }
 }

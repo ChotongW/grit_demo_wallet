@@ -16,6 +16,8 @@ services:
     build: !reset
     image: ${REGISTRY_PREFIX}/gateway:latest
     pull_policy: always
+    environment:
+      - API_KEY=${API_KEY:-secret}
   caddy:
     image: caddy:alpine
     restart: always
