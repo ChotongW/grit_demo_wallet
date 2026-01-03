@@ -13,5 +13,10 @@ services:
     build: !reset
     image: ${REGISTRY_PREFIX}/gateway:latest
     pull_policy: always
-
-# Postgres uses the standard image defined in docker-compose.yaml, so no override needed.
+  caddy:
+    image: caddy:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    command: caddy reverse-proxy --from demo-wallet.duckdns.org --to api-gateway:8080
